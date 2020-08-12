@@ -88,7 +88,7 @@
             {% block dashboardActive %}
               <a href="/" class="nav-link">
             {% endblock dashboardActive %}
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-home"></i>
               <p>
                 Dashboard
               </p>
@@ -135,7 +135,17 @@
             </ul>
           </li>
 
+          <li class="nav-item">
+            
 
+              <a href="{% url 'home:form' %}" class="nav-link">
+
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Latihan
+              </p>
+            </a>
+          </li>
 
           <li class="nav-header">EXAMPLES</li>
           <li class="nav-item">
@@ -176,7 +186,7 @@
     <strong>Copyright &copy; 2020 <a href="#">M. Ade Candra</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> Alpha
+      <b>Version</b> Pre-Alpha
     </div>
   </footer>
 
