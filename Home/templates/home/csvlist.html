@@ -1,15 +1,12 @@
 {% extends 'base.html' %}
 
+    
 {% block pageTitle %}
       {{pageTitle}}
 {% endblock pageTitle %}
-  
-
-{% block tableActive %}
-<a href="#" class="nav-link active">
-{% endblock tableActive %}
 
 {% block contents %}
+  
 <section class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
@@ -23,6 +20,22 @@
           </ol>
         </div>
       </div>
+        {% if messages %}
+            {% for message in messages %}
+                <div>
+        <!--                | means OR operator-->
+                    <strong style="color: red;">{{message|safe}}</strong>
+                </div>
+            {% endfor %}
+        {% else %}
+        {{order}}
+        <form action="{% url 'home:csv' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form}}
+            <small>Only accepts CSV files</small>
+            <button type="submit">Upload</button>
+        </form>
+        {% endif %}
     </div><!-- /.container-fluid -->
   </section>
   <section class="content">
@@ -32,32 +45,33 @@
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">DataTable with minimal features & hover style</h3>
+          <form>
+            <a href="{% url 'home:csvlist' %}" class='btn btn-danger'>Hapus semua</a>
+          </form>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
           <table id="example2" class="table table-bordered table-hover">
             <thead>
             <tr>
-              <th>No</th>
-              <th>Horsepower</th>
-              <th>Displacement</th>
-              <th>Weight in lbs</th>
+                <th>No</th>
+                <th>Tahun</th>
+                <th>Bulan</th>
+                <th>Harga</th>
+                <th>Nama Item</th>
             </tr>
             </thead>
             <tbody>
-              
-                
-                {% for data in datas %}
+                {% for data in object_list %}
                 <tr>
-                  <th>{{forloop.counter}}</th>
-                  <th>{{data.Horsepower}}</th>
-                  <th>{{data.Displacement}}</th>
-                  <th>{{data.Weight_in_lbs}}</th>
-                </tr>  
+                    <td>{{forloop.counter}}</td>
+                    <td>{{data.nama_tahun}}</td>
+                    <td>{{data.nama_bulan}}</td>
+                    <td>{{data.data_content}}</td>
+                    <td>{{data.nama_item}}</td>
+                </tr>
                 {% endfor %}
-                  
-                
-              
+                            
             </tbody>
           </table>
         </div>
@@ -70,6 +84,5 @@
         </div>
     </div>
 </section>
-
 {% endblock contents %}
     
