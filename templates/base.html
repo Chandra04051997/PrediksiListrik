@@ -109,9 +109,9 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{% url 'home:datauser' %}" class="nav-link">
+                <a href="{% url 'home:csvlist' %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Data User</p>
+                  <p>Data CSV</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -146,6 +146,18 @@
               </p>
             </a>
           </li>
+
+          <li class="nav-item">
+            
+
+            <a href="{% url 'home:csv' %}" class="nav-link">
+
+            <i class="nav-icon fas fa-edit"></i>
+            <p>
+              Latihan 2
+            </p>
+          </a>
+        </li>
 
           <li class="nav-header">EXAMPLES</li>
           <li class="nav-item">
@@ -186,7 +198,7 @@
     <strong>Copyright &copy; 2020 <a href="#">M. Ade Candra</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> Pre-Alpha
+      <b>Version:</b> Production
     </div>
   </footer>
 
@@ -201,6 +213,12 @@
   <span class="loader"><span class="loader-inner"></span></span>
 </div>
 <!-- jQuery -->
+
+
+  
 {% include 'snippets/scripts.html' %}
+{% block script %}
+  
+{% endblock script %}
 </body>
 </html>

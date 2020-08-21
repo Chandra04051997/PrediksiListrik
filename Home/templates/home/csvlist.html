@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+    
+{% block pageTitle %}
+      {{pageTitle}}
+{% endblock pageTitle %}
+
+{% block contents %}
+  
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>DataTables</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">DataTables</li>
+          </ol>
+        </div>
+      </div>
+        {% if messages %}
+            {% for message in messages %}
+                <div>
+        <!--                | means OR operator-->
+                    <strong style="color: red;">{{message|safe}}</strong>
+                </div>
+            {% endfor %}
+        {% else %}
+        {{order}}
+        <form action="{% url 'home:csv' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="file1"> Upload a file</label>
+        <input type="file" id="file1" name="file">
+        <small>Only accepts CSV files</small>
+            <button type="submit">Upload</button>
+        </form>
+        {% endif %}
+    </div><!-- /.container-fluid -->
+  </section>
+  <section class="content">
+    <div class="container-fluid">
+        <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Data Time Series Harga Beras dari Tahun 2010-2019</h3>
+          <div class="float-sm-right">
+            <a class="btn btn-primary" href="{% url 'home:train' %}" target="_blank">Train Data</a>
+            <a class="btn btn-primary" href="{% url 'home:test' %}" target="_blank">Test Data</a>
+          </div>
+        </div>
+        
+        <!-- /.card-header -->
+        <div class="card-body">
+          <table id="example2" class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>No</th>
+                <th>Tanggal (Tahun-Bulan)</th>
+                <th>Harga</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for data in object_list %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{data.nama_tahun}}</td>
+                    <td>{{data.data_content|floatformat:3}}</td>
+                </tr>
+                {% endfor %}
+                            
+            </tbody>
+          </table>
+         <br>
+         <br>
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Chart</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="chart">
+                 <img src="data:image/png;base64,{{matplot}}" alt="" width="1050" height="450">
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+      <!-- /.card -->
+    </div>
+    <!-- /.col -->
+        </div>
+    </div>
+</section>
+{% endblock contents %}
+    
