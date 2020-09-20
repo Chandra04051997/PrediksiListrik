@@ -45,13 +45,12 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Data Time Series Harga Beras dari Tahun 2010-2019</h3>
+          <h3 class="card-title">DataTable with minimal features & hover style</h3>
           <div class="float-sm-right">
-            <a class="btn btn-primary" href="{% url 'home:train' %}" target="_blank">Train Data</a>
-            <a class="btn btn-primary" href="{% url 'home:test' %}" target="_blank">Test Data</a>
+            <a href="{% url 'home:train' %}" class="btn btn-primary">Train Data</a>
+            <a href="{% url 'home:test' %}" class="btn btn-primary">Test Data</a>
           </div>
         </div>
-        
         <!-- /.card-header -->
         <div class="card-body">
           <table id="example2" class="table table-bordered table-hover">
@@ -67,18 +66,21 @@
                 <tr>
                     <td>{{forloop.counter}}</td>
                     <td>{{data.nama_tahun}}</td>
-                    <td>{{data.data_content|floatformat:3}}</td>
+                    <td>{{data.data_content}}</td>
                 </tr>
                 {% endfor %}
                             
             </tbody>
           </table>
-         <br>
-         <br>
+
+          <br>
+          <br>
+
+
           <div class="card card-primary">
             <div class="card-header">
               <h3 class="card-title">Chart</h3>
-
+    
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                 </button>

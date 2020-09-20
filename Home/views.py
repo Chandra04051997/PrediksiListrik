@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import RedirectView, ListView
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
-from .bnn import regresi
 from .models import data, hasil, datasCSV
 import urllib
 import csv, io
@@ -37,14 +36,16 @@ import urllib, base64
 def index(request):
     user = User.objects.all()
     datas = datasCSV.objects.all()
-    hasil = regresi(100,200,4000)
+    datalatih = int(datas.count()*80/100)
+    datauji = int(datas.count()*20/100)
     print(hasil)
     context={
         'title':'Home',
         'dataUser':user,
         'datas':datas,
+        'datalatih':datalatih,
+        'datauji':datauji,
         'pageTitle':'Dashboard',
-        # 'prediksi':bnn()
         'active':'active'
     }
     return render(request, 'index.html', context)
@@ -69,26 +70,6 @@ def create(request):
     x1 = 0
     x2 = 0
     x3 = 0
-
-    if request.method == "POST":
-        x1 = int(request.POST['Displacement'])
-        x2 = int(request.POST['Horsepower'])
-        x3 = int(request.POST['Weight'])
-        print(request.POST)
-        print(x1)
-        print(x2)
-        print(x3)
-        # id = data.objects.get()
-        regresiLinear = regresi(x1,x2,x3)
-        print(regresiLinear)
-
-        context = {
-            'hasil':regresiLinear,
-            'id':id
-        }
-
-        return redirect('/data/hasil/?' + urllib.parse.urlencode(context) )
-    
     context = {
         'pageTitle':'Create',
     }

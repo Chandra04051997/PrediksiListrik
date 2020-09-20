@@ -13,6 +13,7 @@ from .views import (
     testData,
     trainData
 )
+
 app_name ='home'
 urlpatterns = [
     path('', index, name='index'),
@@ -22,10 +23,9 @@ urlpatterns = [
     path('data/hasil/', hasil, name='hasil'),
     path('data/csv/', uploadCSV, name='csv'),
     path('data/csv/list' , CSVListView.as_view(), name='csvlist'),
-    path('data/csv/delete/all', deleteAll, name='deleteAll'),
     path('data/train/', trainData, name='train'),
-    path('data/test/', testData, name='test')
-]
+    path('data/test/', testData, name='test'),
 
+]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
